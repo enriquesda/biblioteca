@@ -106,5 +106,18 @@ public class Usuario {
         }
     }
 
+
+    @Override
+    public String toString() {
+        return "{" +
+            " nombre='" + getNombre() + "'" +
+            ", contraseña='" + getContraseña() + "'" +
+            ", edad='" + getEdad() + "'" +
+            ", sexo='" + getSexo() + "'" +
+            ", correo='" + getCorreo() + "'" +
+            ", tipo='" + getTipo() + "'" +
+            "}";
+    }
+
 }
 

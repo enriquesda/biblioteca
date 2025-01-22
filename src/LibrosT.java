@@ -1,5 +1,5 @@
 public class LibrosT {
-    libro librost[];
+    private libro librost[];
 
     public LibrosT() {
         this.librost = new libro[60];
@@ -10,9 +10,13 @@ public class LibrosT {
                 librost[i] = l;
                 break;
             }
+
+            else{
+                System.out.println("Error. Libreria llena");
+            }
         }
     }
-    public void mostrarLibros() {
+    public void mostrarLibrosD() {
         for (int i = 0; i < librost.length; i++) {
             if (librost[i] != null) {
                 System.out.println(i+"º"+librost[i].toString());

@@ -6,6 +6,8 @@ public class Usuario {
     private char sexo;
     private String correo;
     private char tipo;
+    private final char sexoFinal = 'H';
+    private final char tipoFinal = 'U';
 
     public Usuario() {
         this.nombre = "";
@@ -20,16 +22,16 @@ public class Usuario {
         this();
         this.nombre=nombre;
         this.contraseña=contraseña;
-        this.tipo=comprobarTipo();
+        this.tipo=comprobarTipo(tipo);
     }
 
     public Usuario(String nombre, String contraseña, int edad, char sexo, String correo,char tipo) {
         this.nombre = nombre;
         this.contraseña = contraseña;
         this.edad = edad;
-        this.sexo = comprobarSexo();
+        this.sexo = comprobarSexo(sexo);
         this.correo = correo;
-        this.tipo=comprobarTipo();
+        this.tipo=comprobarTipo(tipo);
     }
 
     public String getNombre() {
@@ -61,7 +63,7 @@ public class Usuario {
     }
 
     public void setSexo(char sexo) {
-        this.sexo = sexo;
+        this.sexo = comprobarSexo(sexo);
     }
 
     public String getCorreo() {
@@ -78,6 +80,30 @@ public class Usuario {
 
     public void setTipo(char tipo) {
         this.tipo = tipo;
+    }
+
+     // Método comprobar sexo
+
+     private char comprobarSexo(char sexo) {
+
+        if (sexo == 'H' || sexo == 'M') {
+            return sexo;
+        }
+
+        else {
+            return this.sexo = this.sexoFinal;
+        }
+    }
+
+    private char comprobarTipo(char tipo) {
+
+        if (tipo == 'A' || sexo == 'U') {
+            return tipo;
+        }
+
+        else {
+            return this.tipo = this.tipoFinal;
+        }
     }
 
 }

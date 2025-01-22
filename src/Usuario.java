@@ -79,7 +79,7 @@ public class Usuario {
     }
 
     public void setTipo(char tipo) {
-        this.tipo = tipo;
+        this.tipo = comprobarTipo(tipo);
     }
 
      // Método comprobar sexo

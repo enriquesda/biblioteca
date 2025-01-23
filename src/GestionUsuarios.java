@@ -14,8 +14,11 @@ public class GestionUsuarios {
 
     // Método para añadir un Usuario al array
     public void añadirUsuario(Usuario usur) {
-        listaUsurs[lleno] = usur;
-        lleno++;
+        if(lleno<tamaño){
+            listaUsurs[lleno] = usur;
+            lleno++;
+        }
+       
     }
 
     // Método para buscar el índice en el array de Usuario cuando coincide con el
@@ -44,20 +47,21 @@ public class GestionUsuarios {
     public void cambiarContraseña(String usur) {
         int indice = buscarIndice(usur);
         if (indice != -1) {
-            System.out.println("Introduce tu contraseña");
+            System.out.println("Introduce tu contraseña actual para " + usur + "\n");
             String con = sc.nextLine();
             if (con.equals(listaUsurs[indice].getContraseña())) {
-                System.out.println("Introduce una nueva contraseña");
+                System.out.println("Introduce una nueva contraseña" + "\n");
                 String con2 = sc.nextLine();
                 listaUsurs[indice].setContraseña(con2);
-                System.out.println("Su contraseña ha sido cambiada");
+                System.out.println("Su contraseña ha sido cambiada" + "\n");
             } else {
-                System.out.println("Su contarseña no coincide.No se ha podido cambiar su contraseña");
+                System.out.println("Su contarseña no coincide.No se ha podido cambiar su contraseña" + "\n");
             }
         }
 
     }
 
+    // Método para eliminar Usuario
     public void eliminarUsuario(String usur) {
         int indice = buscarIndice(usur);
         if (indice != -1) {
@@ -65,10 +69,119 @@ public class GestionUsuarios {
                 listaUsurs[i] = listaUsurs[i + 1];
             }
             listaUsurs[--lleno] = null;
-            System.out.println("Se ha eliminado el usuario " + usur);
+            System.out.println("Se ha eliminado el usuario " + usur + "\n");
         } else {
-            System.out.println("No se ha podido eliminar el usuario " + usur);
+            System.out.println("No se ha podido eliminar el usuario " + usur + "\n");
         }
+    }
+
+    // MOSTRAR LISTA DE USUARIOS REGISTRADOS
+    public String listaUsuarios() {
+        String usuarios = "";
+        for (int i = 0; i < lleno; i++) {
+            usuarios += listaUsurs[i].getNombre() + "\n";
+        }
+        return usuarios;
+    }
+
+    // MOSTRAR TODA LA INFORMACIÓN DE TODOS LOS USUARIOS
+    public String listaTodaInfoUsurs() {
+        String usuarios = "";
+        for (int i = 0; i < lleno; i++) {
+            usuarios += listaUsurs[i].toString() + "\n";
+        }
+        return usuarios;
+    }
+
+    // MOSTRAR INFORMACIÓN DE UN USUARIO
+    public String infoUsuario(String usuario) {
+        String usur = "";
+        int indice = buscarIndice(usuario);
+        if (indice != -1) {
+            usur += listaUsurs[indice].toString() + "\n";
+        }
+        return usur;
+    }
+
+    //MÉTODO PARA REGISTRAR UN USUARIO
+    public void registarUsuario(String usuario){
+        Usuario usur=new Usuario();
+        int indice = buscarIndice(usuario);
+        boolean funcionando=true;
+        if(indice==-1){
+            do {
+                System.out.println("¿Quieres registrar el usuario?" + "\n");
+                System.out.println("1: SI");
+                System.out.println("2: NO" + "\n");
+            
+                int numero = Integer.parseInt(sc.nextLine());
+                switch (numero) {
+                    case 1:
+                        indice=lleno;
+                        System.out.println("Dime tu usuarrio" + "\n");
+                        usuario=sc.nextLine();
+                        usur.setNombre(usuario);
+                        System.out.println("Dime tu contraseña" + "\n");
+                        String contraseña=sc.nextLine();
+                        usur.setContraseña(contraseña);
+                        System.out.println("¿Seguro que quiere registrarlo?" + "\n");
+                        System.out.println("SI");
+                        System.out.println("NO");
+                        String confir=sc.nextLine();
+                        if(confir.equals("SI")){
+                            listaUsurs[indice]=usur;
+                            lleno++;
+                            System.out.println("Usuario añadido" + "\n");
+                        }
+                        else{
+                            System.out.println("No se ha añadido el usuario" + "\n");
+                        }
+                        
+                        
+                    default:
+                        funcionando = false;
+                }
+    
+            } while (funcionando);
+        }
+    }
+
+    //MÉTODO PARA CONFIRMAR INICIO DE SESIÓN Y SI NO ESTAS REGISTRADO PUES TE PUEDES REGISTRAR
+    public void confirmarUsurCont() { // MAL--->CORREGIR---> no me va cuando la contraseña es incorrecta
+        System.out.println("Bienvenido a la Biblioteca" + "\n" );
+        System.out.println("Introduce tu usuario" + "\n");
+        String usuario = sc.nextLine();
+        System.out.println("Introduce tu contraseña" + "\n");
+        String contraseña = sc.nextLine();
+        int indice = buscarIndice(usuario);
+        boolean cierto = true;
+        while (cierto) {
+            if (indice != -1) {
+                if (listaUsurs[indice].getNombre().equals(usuario)
+                        && listaUsurs[indice].getContraseña().equals(contraseña)) {
+                    System.out.println("Usuario y contraseña correctas" + "\n");
+                    cierto = false;
+
+                } else {
+                    System.out.println("Contraseña incorrecta.Vuelva a introducir sus credenciales" + "\n");
+                    System.out.println("Introduce tu usuario" + "\n");
+                    usuario = sc.nextLine();
+                    System.out.println("Introduce tu contraseña" + "\n");
+                    contraseña = sc.nextLine();
+                    indice = buscarIndice(usuario);
+                }
+            } else {
+                System.out.println("Usuario incorrecto o no registrado" + "\n");
+                registarUsuario(usuario);
+                System.out.println("Introduce tu usuario" + "\n");
+                usuario = sc.nextLine();
+                System.out.println("Introduce tu contraseña" + "\n");
+                contraseña = sc.nextLine();
+                indice = buscarIndice(usuario);
+            }
+
+        }
+
     }
 
 }

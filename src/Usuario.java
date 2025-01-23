@@ -1,4 +1,8 @@
+import java.util.Scanner;
+
 public class Usuario {
+
+    public static Scanner sc = new Scanner(System.in);
 
     private String nombre;
     private String contraseña;
@@ -8,6 +12,7 @@ public class Usuario {
     private char tipo;
     private final char sexoFinal = 'H';
     private final char tipoFinal = 'U';
+    private final String contDefecto = "123456";
 
     public Usuario() {
         this.nombre = "";
@@ -15,23 +20,34 @@ public class Usuario {
         this.edad = 0;
         this.sexo = 'H';
         this.correo = "";
-        this.tipo='U';
+        this.tipo = 'U';
     }
 
-    public Usuario(String nombre,String contraseña,char tipo){
+    public Usuario(String nombre) {
         this();
-        this.nombre=nombre;
-        this.contraseña=contraseña;
-        this.tipo=comprobarTipo(tipo);
+        this.nombre = nombre;
     }
 
-    public Usuario(String nombre, String contraseña, int edad, char sexo, String correo,char tipo) {
+    public Usuario(String nombre, String contraseña) {
+        this();
         this.nombre = nombre;
-        this.contraseña = contraseña;
+        this.contraseña = comprobarContraseña(contraseña);
+    }
+
+    public Usuario(String nombre, String contraseña, char tipo) {
+        this();
+        this.nombre = nombre;
+        this.contraseña = comprobarContraseña(contraseña);
+        this.tipo = comprobarTipo(tipo);
+    }
+
+    public Usuario(String nombre, String contraseña, int edad, char sexo, String correo, char tipo) {
+        this.nombre = nombre;
+        this.contraseña = comprobarContraseña(contraseña);
         this.edad = edad;
         this.sexo = comprobarSexo(sexo);
         this.correo = correo;
-        this.tipo=comprobarTipo(tipo);
+        this.tipo = comprobarTipo(tipo);
     }
 
     public String getNombre() {
@@ -46,8 +62,8 @@ public class Usuario {
         return contraseña;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setContraseña(String cont1) {
+        this.contraseña = comprobarContraseña(cont1);
     }
 
     public int getEdad() {
@@ -75,16 +91,16 @@ public class Usuario {
     }
 
     public char getTipo() {
-        return sexo;
+        return tipo;
     }
 
     public void setTipo(char tipo) {
         this.tipo = comprobarTipo(tipo);
     }
 
-     // Método comprobar sexo
+    // Método comprobar sexo
 
-     private char comprobarSexo(char sexo) {
+    private char comprobarSexo(char sexo) {
 
         if (sexo == 'H' || sexo == 'M') {
             return sexo;
@@ -97,7 +113,7 @@ public class Usuario {
 
     private char comprobarTipo(char tipo) {
 
-        if (tipo == 'A' || sexo == 'U') {
+        if (tipo == 'A' || tipo == 'U') {
             return tipo;
         }
 
@@ -106,18 +122,30 @@ public class Usuario {
         }
     }
 
+    // Método para comprobar la contraseña
+    private String comprobarContraseña(String cont) {
+        if (cont.length() <= 8 && cont.length() >= 5) {
+            for (int i = 0; i < cont.length(); i++) {
+                if (cont.charAt(i) == ' ' || cont.charAt(i) == '.' || cont.charAt(i) == ',' || cont.charAt(i) == ';') {
+                    return this.contraseña = contDefecto;
+                }
+            }
+            return this.contraseña = cont;
+        } else {
+            return this.contraseña = contDefecto;
+        }
+    }
 
     @Override
     public String toString() {
         return "{" +
-            " nombre='" + getNombre() + "'" +
-            ", contraseña='" + getContraseña() + "'" +
-            ", edad='" + getEdad() + "'" +
-            ", sexo='" + getSexo() + "'" +
-            ", correo='" + getCorreo() + "'" +
-            ", tipo='" + getTipo() + "'" +
-            "}";
+                " nombre='" + getNombre() + "'" +
+                ", contraseña='" + getContraseña() + "'" +
+                ", edad='" + getEdad() + "'" +
+                ", sexo='" + getSexo() + "'" +
+                ", correo='" + getCorreo() + "'" +
+                ", tipo='" + getTipo() + "'" +
+                "}";
     }
 
 }
-

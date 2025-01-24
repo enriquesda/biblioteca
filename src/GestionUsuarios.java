@@ -14,11 +14,11 @@ public class GestionUsuarios {
 
     // Método para añadir un Usuario al array
     public void añadirUsuario(Usuario usur) {
-        if(lleno<tamaño){
+        if (lleno < tamaño) {
             listaUsurs[lleno] = usur;
             lleno++;
         }
-       
+
     }
 
     // Método para buscar el índice en el array de Usuario cuando coincide con el
@@ -103,51 +103,52 @@ public class GestionUsuarios {
         return usur;
     }
 
-    //MÉTODO PARA REGISTRAR UN USUARIO
-    public void registarUsuario(String usuario){
-        Usuario usur=new Usuario();
+    // MÉTODO PARA REGISTRAR UN USUARIO
+    public Usuario registarUsuario(String usuario) {
+        Usuario usur = new Usuario();
         int indice = buscarIndice(usuario);
-        boolean funcionando=true;
-        if(indice==-1){
+        boolean funcionando = true;
+        if (indice == -1) {
             do {
                 System.out.println("¿Quieres registrar el usuario?" + "\n");
                 System.out.println("1: SI");
                 System.out.println("2: NO" + "\n");
-            
+
                 int numero = Integer.parseInt(sc.nextLine());
                 switch (numero) {
                     case 1:
-                        indice=lleno;
+                        indice = lleno;
                         System.out.println("Dime tu usuarrio" + "\n");
-                        usuario=sc.nextLine();
+                        usuario = sc.nextLine();
                         usur.setNombre(usuario);
                         System.out.println("Dime tu contraseña" + "\n");
-                        String contraseña=sc.nextLine();
+                        String contraseña = sc.nextLine();
                         usur.setContraseña(contraseña);
                         System.out.println("¿Seguro que quiere registrarlo?" + "\n");
                         System.out.println("SI");
                         System.out.println("NO");
-                        String confir=sc.nextLine();
-                        if(confir.equals("SI")){
+                        String confir = sc.nextLine();
+                        if (confir.equals("SI")) {
                             añadirUsuario(usur);
                             System.out.println("Usuario añadido" + "\n");
-                        }
-                        else{
+                        } else {
                             System.out.println("No se ha añadido el usuario" + "\n");
                         }
-                        
-                        
+
                     default:
                         funcionando = false;
                 }
-    
+
             } while (funcionando);
         }
+        return usur;
     }
 
-    //MÉTODO PARA CONFIRMAR INICIO DE SESIÓN Y SI NO ESTAS REGISTRADO PUES TE PUEDES REGISTRAR
-    public void confirmarUsurCont() { // MAL--->CORREGIR---> no me va cuando la contraseña es incorrecta
-        System.out.println("Bienvenido a la Biblioteca" + "\n" );
+    // MÉTODO PARA CONFIRMAR INICIO DE SESIÓN (si el usuario y la contraseña son correctas) Y SI NO ESTAS REGISTRADO PUES TE
+    // PUEDES REGISTRAR
+    public Usuario confirmarUsurCont() {
+        Usuario pers = new Usuario();
+        System.out.println("Bienvenido a la Biblioteca" + "\n");
         System.out.println("Introduce tu usuario" + "\n");
         String usuario = sc.nextLine();
         System.out.println("Introduce tu contraseña" + "\n");
@@ -159,6 +160,7 @@ public class GestionUsuarios {
                 if (listaUsurs[indice].getNombre().equals(usuario)
                         && listaUsurs[indice].getContraseña().equals(contraseña)) {
                     System.out.println("Usuario y contraseña correctas" + "\n");
+                    pers = listaUsurs[indice];
                     cierto = false;
 
                 } else {
@@ -180,7 +182,35 @@ public class GestionUsuarios {
             }
 
         }
-
+        return pers;
     }
 
+    // MÉTODO PARA EL INICIO --> te da a elegir entre si quieres iniciar sesión o si te quieres registrar
+    public Usuario inicioSesion() {
+        Usuario pers1 = new Usuario();
+        boolean funcionando = true;
+        System.out.println("LIBRERÍA AMVER");
+        do {
+            System.out.println("¿QUÉ QUIERES HACER?" + "\n");
+            System.out.println("1: INICIAR SESIÓN");
+            System.out.println("2: REGISTRAR USUARIO" + "\n");
+
+            int numero = Integer.parseInt(sc.nextLine());
+            switch (numero) {
+                case 1:
+                    pers1 = confirmarUsurCont();
+                    funcionando=false;
+                    break;
+
+                case 2:
+                    pers1 = registarUsuario(pers1.getNombre());
+                    break;
+
+                default:
+                    funcionando = false;
+            }
+
+        } while (funcionando);
+        return pers1;
+    }
 }

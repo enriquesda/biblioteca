@@ -6,14 +6,90 @@ public class Principal {
 
     public static void main(String[] args) throws Exception {
         GestionUsuarios usuarios = new GestionUsuarios();
+        boolean funcionando=true;
         meterDatos(usuarios);
+        Usuario persona1=usuarios.inicioSesion();
+        if(persona1.getTipo()=='A'){
+            do {
+                System.out.println("1: Agregar libro nuevo");
+                System.out.println("2: Eliminar libro");
+                System.out.println("3: Actualizar libro");//ENRIQUE AÑADE MENÚ PARA BUSCAR LIBRO
+                System.out.println("4: Buscar libro"); //ENRIQUE AÑADE MENÚ PARA BUSCAR LIBRO
+                System.out.println("5: Libros disponibles"); //ENRIQUE AÑADE FUNCIÓN
+                System.out.println("6: Registrar Nuevo usuario");
+                System.out.println("7: Eliminar usuario");
+                System.out.println("8: Consultar información de usuario");
+                System.out.println("9: Realizar préstamos de libros");//ENRIQUE METE FUNCIÓN
+                System.out.println("10: Devolver libros prestados"); //ENRIQUE METE FUNCIÓN
+                System.out.println("11: Mostrar libros actualmente prestados"); //ENRIQUE METE FUNCIÓN
+                System.out.println("12: Mostrar número totales de libros prestados y activos");//ENRIQUE METE FUNCIÓN
+                System.out.println("13: Lista libros más prestados"); //ENRIQUE METE FUNCIÓN
+                System.out.println("14: Usuario con más préstamos activos"); //ENRIQUE METE FUNCIÓN
+                int numero = Integer.parseInt(sc.nextLine());
+                switch (numero) {
+                    case 1:
+                    break;
+                    case 2:
+                    break;
+                    case 3:
+                    break;
+                    case 4:
+                    break;
+                    case 5:
+                    break;
+                    case 6:
+                    break;
+                    case 7:
+                    break;
+                    case 8:
+                    break;
+                    case 9:
+                    break;
+                    case 10:
+                    break;
+                    case 11:
+                    break;
+                    case 12:
+                    break;
+                    case 13:
+                    break;
+                    case 14:
+                    break;
 
-        // PROBAR QUE FUNCIONA BIEN EL MOSTRAR USUARIOS
-   
+                    default:
+                        funcionando = false;
+                }
 
-        usuarios.registarUsuario("pepo");
-        /*g1.confirmarUsurCont();*/
-        /*g1.cambiarContraseña("Alberto");*/
+            } while (funcionando);
+        }
+        else{
+            do {
+                
+                System.out.println("1: Buscar libro"); //ENRIQUE AÑADE MENÚ PARA BUSCAR LIBRO
+                System.out.println("2: Libros disponibles"); //ENRIQUE AÑADE FUNCIÓN
+                System.out.println("3: Realizar préstamos de libros");//ENRIQUE METE FUNCIÓN
+                System.out.println("4: Devolver libros prestados"); //ENRIQUE METE FUNCIÓN
+                
+                int numero = Integer.parseInt(sc.nextLine());
+                switch (numero) {
+                    case 1:
+                    break;
+                    case 2:
+                    break;
+                    case 3:
+                    break;
+                    case 4:
+                    break;
+                    
+                    default:
+                        funcionando = false;
+                }
+
+            } while (funcionando);
+
+        }
+       
+        //PARA PRUEBA
         System.out.println(usuarios.listaUsuarios());
         System.out.println(usuarios.listaTodaInfoUsurs());
         /*System.out.println(g1.infoUsuario("pepe"));*/

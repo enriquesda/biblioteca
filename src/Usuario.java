@@ -111,6 +111,7 @@ public class Usuario {
         }
     }
 
+    //Método para comprobar el tipo
     private char comprobarTipo(char tipo) {
 
         if (tipo == 'A' || tipo == 'U') {

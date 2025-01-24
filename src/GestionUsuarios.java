@@ -129,8 +129,7 @@ public class GestionUsuarios {
                         System.out.println("NO");
                         String confir=sc.nextLine();
                         if(confir.equals("SI")){
-                            listaUsurs[indice]=usur;
-                            lleno++;
+                            añadirUsuario(usur);
                             System.out.println("Usuario añadido" + "\n");
                         }
                         else{

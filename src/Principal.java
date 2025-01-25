@@ -6,81 +6,110 @@ public class Principal {
 
     public static void main(String[] args) throws Exception {
         GestionUsuarios usuarios = new GestionUsuarios();
-        boolean funcionando=true;
+        boolean funcionando = true;
         meterDatos(usuarios);
-        Usuario persona1=usuarios.inicioSesion();
-        if(persona1.getTipo()=='A'){
+        Usuario persona1 = usuarios.inicioSesion();
+        if (persona1.getTipo() == 'A') {
             do {
                 System.out.println("1: Agregar libro nuevo");
                 System.out.println("2: Eliminar libro");
-                System.out.println("3: Actualizar libro");//ENRIQUE AÑADE MENÚ PARA BUSCAR LIBRO
-                System.out.println("4: Buscar libro"); //ENRIQUE AÑADE MENÚ PARA BUSCAR LIBRO
-                System.out.println("5: Libros disponibles"); //ENRIQUE AÑADE FUNCIÓN
+                System.out.println("3: Actualizar libro");// ENRIQUE AÑADE MENÚ PARA BUSCAR LIBRO
+                System.out.println("4: Buscar libro"); // ENRIQUE AÑADE MENÚ PARA BUSCAR LIBRO
+                System.out.println("5: Libros disponibles"); // ENRIQUE AÑADE FUNCIÓN
                 System.out.println("6: Registrar Nuevo usuario");
                 System.out.println("7: Eliminar usuario");
                 System.out.println("8: Consultar información de usuario");
-                System.out.println("9: Realizar préstamos de libros");//ENRIQUE METE FUNCIÓN
-                System.out.println("10: Devolver libros prestados"); //ENRIQUE METE FUNCIÓN
-                System.out.println("11: Mostrar libros actualmente prestados"); //ENRIQUE METE FUNCIÓN
-                System.out.println("12: Mostrar número totales de libros prestados y activos");//ENRIQUE METE FUNCIÓN
-                System.out.println("13: Lista libros más prestados"); //ENRIQUE METE FUNCIÓN
-                System.out.println("14: Usuario con más préstamos activos"); //ENRIQUE METE FUNCIÓN
+                System.out.println("9: Realizar préstamos de libros");// ENRIQUE METE FUNCIÓN
+                System.out.println("10: Devolver libros prestados"); // ENRIQUE METE FUNCIÓN
+                System.out.println("11: Mostrar libros actualmente prestados"); // ENRIQUE METE FUNCIÓN
+                System.out.println("12: Mostrar número totales de libros prestados y activos");// ENRIQUE METE FUNCIÓN
+                System.out.println("13: Lista libros más prestados"); // ENRIQUE METE FUNCIÓN
+                System.out.println("14: Usuario con más préstamos activos"); // ENRIQUE METE FUNCIÓN
                 int numero = Integer.parseInt(sc.nextLine());
                 switch (numero) {
                     case 1:
-                    break;
+                        break;
                     case 2:
-                    break;
+                        break;
                     case 3:
-                    break;
+                        break;
                     case 4:
-                    break;
+                        break;
                     case 5:
-                    break;
+                        break;
                     case 6:
-                    break;
+                        usuarios.registarUsuario();
+                        break;
                     case 7:
-                    break;
+                        System.out.println("Introduce el usuario a borrar");
+                        String usur = sc.nextLine();
+                        usuarios.eliminarUsuario(usur);
+                        break;
                     case 8:
-                    break;
+                        boolean salir = true;
+                        do {
+                            System.out.println("¿Qué desea buscar¿");
+                            System.out.println("1: Lista de usuarios");
+                            System.out.println("2: Toda la información de todos los usuarios");
+                            System.out.println("3: Información de un usuaio");
+                            System.out.println("4: Salir");
+                            int numero1 = Integer.parseInt(sc.nextLine());
+
+                            switch (numero1) {
+                                case 1:
+                                    System.out.println(usuarios.listaUsuarios());
+                                    break;
+                                case 2:
+                                    System.out.println(usuarios.listaTodaInfoUsurs());
+                                    break;
+                                case 3:
+                                    System.out.println("Introduce el usuario");
+                                    String usur1 = sc.nextLine();
+                                    System.out.println(usuarios.infoUsuario(usur1));
+                                    break;
+                                default:
+                                    salir = false;
+                            }
+                        } while (salir);
+
+                        break;
                     case 9:
-                    break;
+                        break;
                     case 10:
-                    break;
+                        break;
                     case 11:
-                    break;
+                        break;
                     case 12:
-                    break;
+                        break;
                     case 13:
-                    break;
+                        break;
                     case 14:
-                    break;
+                        break;
 
                     default:
                         funcionando = false;
                 }
 
             } while (funcionando);
-        }
-        else{
+        } else {
             do {
-                
-                System.out.println("1: Buscar libro"); //ENRIQUE AÑADE MENÚ PARA BUSCAR LIBRO
-                System.out.println("2: Libros disponibles"); //ENRIQUE AÑADE FUNCIÓN
-                System.out.println("3: Realizar préstamos de libros");//ENRIQUE METE FUNCIÓN
-                System.out.println("4: Devolver libros prestados"); //ENRIQUE METE FUNCIÓN
-                
+
+                System.out.println("1: Buscar libro"); // ENRIQUE AÑADE MENÚ PARA BUSCAR LIBRO
+                System.out.println("2: Libros disponibles"); // ENRIQUE AÑADE FUNCIÓN
+                System.out.println("3: Realizar préstamos de libros");// ENRIQUE METE FUNCIÓN
+                System.out.println("4: Devolver libros prestados"); // ENRIQUE METE FUNCIÓN
+
                 int numero = Integer.parseInt(sc.nextLine());
                 switch (numero) {
                     case 1:
-                    break;
+                        break;
                     case 2:
-                    break;
+                        break;
                     case 3:
-                    break;
+                        break;
                     case 4:
-                    break;
-                    
+                        break;
+
                     default:
                         funcionando = false;
                 }
@@ -88,15 +117,17 @@ public class Principal {
             } while (funcionando);
 
         }
-       
-        //PARA PRUEBA
-        System.out.println(usuarios.listaUsuarios());
-        System.out.println(usuarios.listaTodaInfoUsurs());
-        /*System.out.println(g1.infoUsuario("pepe"));*/
+
+        // PARA PRUEBA
+        /*
+         * System.out.println(usuarios.listaUsuarios());
+         * System.out.println(usuarios.listaTodaInfoUsurs());
+         * System.out.println(g1.infoUsuario("pepe"));
+         */
         sc.close();
     }
 
-    public static void meterDatos(GestionUsuarios usuario){
+    public static void meterDatos(GestionUsuarios usuario) {
         usuario.añadirUsuario(new Usuario("Alberto", "1a2345", 'A'));
         usuario.añadirUsuario(new Usuario("Beatriz", "2b3456", 'U'));
         usuario.añadirUsuario(new Usuario("Carlos", "3c4567", 'U'));

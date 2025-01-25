@@ -104,22 +104,22 @@ public class GestionUsuarios {
     }
 
     // MÉTODO PARA REGISTRAR UN USUARIO
-    public Usuario registarUsuario(String usuario) {
+    public Usuario registarUsuario() {
         Usuario usur = new Usuario();
-        int indice = buscarIndice(usuario);
+        
         boolean funcionando = true;
-        if (indice == -1) {
+    
             do {
-                System.out.println("¿Quieres registrar el usuario?" + "\n");
+                System.out.println("¿Quieres registrar un usuario?" + "\n");
                 System.out.println("1: SI");
                 System.out.println("2: NO" + "\n");
 
                 int numero = Integer.parseInt(sc.nextLine());
                 switch (numero) {
                     case 1:
-                        indice = lleno;
+                        int indice = lleno;
                         System.out.println("Dime tu usuarrio" + "\n");
-                        usuario = sc.nextLine();
+                        String usuario = sc.nextLine();
                         usur.setNombre(usuario);
                         System.out.println("Dime tu contraseña" + "\n");
                         String contraseña = sc.nextLine();
@@ -140,7 +140,7 @@ public class GestionUsuarios {
                 }
 
             } while (funcionando);
-        }
+        
         return usur;
     }
 
@@ -173,7 +173,7 @@ public class GestionUsuarios {
                 }
             } else {
                 System.out.println("Usuario incorrecto o no registrado" + "\n");
-                registarUsuario(usuario);
+                registarUsuario();
                 System.out.println("Introduce tu usuario" + "\n");
                 usuario = sc.nextLine();
                 System.out.println("Introduce tu contraseña" + "\n");
@@ -203,7 +203,7 @@ public class GestionUsuarios {
                     break;
 
                 case 2:
-                    pers1 = registarUsuario(pers1.getNombre());
+                    pers1 = registarUsuario();
                     break;
 
                 default:

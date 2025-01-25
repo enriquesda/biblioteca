@@ -128,11 +128,15 @@ public class Usuario {
         if (cont.length() <= 8 && cont.length() >= 5) {
             for (int i = 0; i < cont.length(); i++) {
                 if (cont.charAt(i) == ' ' || cont.charAt(i) == '.' || cont.charAt(i) == ',' || cont.charAt(i) == ';') {
+                    System.out.println("Caracteres inválidos.Contraseña por defecto " + contDefecto);
                     return this.contraseña = contDefecto;
                 }
             }
+            
             return this.contraseña = cont;
+            
         } else {
+            System.out.println("Caracteres inválidos.Contraseña por defecto " + contDefecto);
             return this.contraseña = contDefecto;
         }
     }

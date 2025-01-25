@@ -44,7 +44,7 @@ public class GestionUsuarios {
     }
 
     // Método para cambiar la contraseña a un usuario
-    public void cambiarContraseña(String usur) {
+    public boolean cambiarContraseña(String usur) {
         int indice = buscarIndice(usur);
         if (indice != -1) {
             System.out.println("Introduce tu contraseña actual para " + usur + "\n");
@@ -54,24 +54,28 @@ public class GestionUsuarios {
                 String con2 = sc.nextLine();
                 listaUsurs[indice].setContraseña(con2);
                 System.out.println("Su contraseña ha sido cambiada" + "\n");
+                return true;
             } else {
                 System.out.println("Su contarseña no coincide.No se ha podido cambiar su contraseña" + "\n");
+                return false;
             }
         }
-
+        return false;
     }
 
     // Método para eliminar Usuario
-    public void eliminarUsuario(String usur) {
+    public boolean eliminarUsuario(String usur) {
         int indice = buscarIndice(usur);
         if (indice != -1) {
-            for (int i = 0; i < lleno - 1; i++) {
+            for (int i = indice; i < lleno - 1; i++) {
                 listaUsurs[i] = listaUsurs[i + 1];
             }
             listaUsurs[--lleno] = null;
             System.out.println("Se ha eliminado el usuario " + usur + "\n");
+            return true;
         } else {
             System.out.println("No se ha podido eliminar el usuario " + usur + "\n");
+            return false;
         }
     }
 
@@ -100,6 +104,9 @@ public class GestionUsuarios {
         if (indice != -1) {
             usur += listaUsurs[indice].toString() + "\n";
         }
+        else{
+            System.out.println("Usuario no encontrado");
+        }
         return usur;
     }
 
@@ -117,7 +124,6 @@ public class GestionUsuarios {
                 int numero = Integer.parseInt(sc.nextLine());
                 switch (numero) {
                     case 1:
-                        int indice = lleno;
                         System.out.println("Dime tu usuarrio" + "\n");
                         String usuario = sc.nextLine();
                         usur.setNombre(usuario);

@@ -3,9 +3,9 @@ public class libro {
 
     private String titulo;
     private String ISBM;
-    private String Categoria;
+    private String Categoria; //¿NO ES MEJOR HACER UN ENUM CON VARIAS CATEGORIAS?
     private String Autor;
-    private String Editorial;
+    private String Editorial; //¿ENUM?
     private int Num_paginas;
     private int Num_prestaciones;
 

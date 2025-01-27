@@ -18,11 +18,31 @@ public class LibrosT {
             System.out.println("Error. Libreria llena");
         }
     }
+    
+    public libro[] getLibrost() {
+        return librost;
+    }
+
+    public void setLibrost(libro[] librost) {
+        this.librost = librost;
+    }
+
+    public int getLleno() {
+        return lleno;
+    }
+
+    public void setLleno(int lleno) {
+        this.lleno = lleno;
+    }
+
+    public static int getTam() {
+        return TAM;
+    }
 
     public void mostrarLibros() {
         for (int i = 0; i < librost.length; i++) {
             if (librost[i] != null) {
-                System.out.println(i + "º" + librost[i].toString());
+                System.out.println(librost[i].toString());
             }
         }
     }
@@ -126,6 +146,13 @@ public class LibrosT {
         return stringlibro;
     }
 
+
+    public void incrementarPrestaciones(String titulo) {
+        int indice = buscarIndiceLibro(titulo);
+        if (indice != -1) {
+            librost[indice].setNum_prestaciones(librost[indice].getNum_prestaciones() + 1);
+        }
+    }
     // añadir prestar libro
 
 }

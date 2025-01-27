@@ -5,251 +5,452 @@ import java.util.Scanner;
  */
 public class Principal {
 
-public static Scanner sc = new Scanner(System.in);
- 
-public static void main(String[] args) throws Exception { // CUANDO YA INICIAS SESIÓN Y TE METES EN CUALQUIER
-                                                          // MENÚ,
-                                                          // SI SALES TE SALES ENTERO DEL PROGRAMA. ME GUSTARÍA
-                                                          // QUE
-                                                          // VOLVIERA AL PRINCIPIO DEL TODO POR SI QUIERES
-                                                          // INICIAR
-                                                          // SESIÓN CON OTRO USUARIO O SALIRTE.
-                                                          //¿CÓMO SE MUEVE EL PUÑETERO CODIGO? ESTÁ MUY PARA LA DERECHA
-GestionUsuarios usuarios = new GestionUsuarios();
-LibrosT libros = new LibrosT();
-boolean funcionando = true;
-meterDatosUsur(usuarios);
-Usuario persona1 = usuarios.inicioSesion();
-if (persona1.getTipo() == 'A') {
-        do {
-                System.out.println("1: Agregar libro nuevo");
-                System.out.println("2: Eliminar libro");
-                System.out.println("3: Actualizar libro");
-                System.out.println("4: Buscar libro");
-                System.out.println("5: Libros disponibles"); // ENRIQUE AÑADE FUNCIÓN
+    public static Scanner sc = new Scanner(System.in);
+
+    public static void main(String[] args) throws Exception { // CUANDO YA INICIAS SESIÓN Y TE METES EN CUALQUIER MENÚ,
+        // SI SALES TE SALES ENTERO DEL PROGRAMA. ME GUSTARÍA QUE
+        // VOLVIERA AL PRINCIPIO DEL TODO POR SI QUIERES INICIAR
+        // SESIÓN CON OTRO USUARIO O SALIRTE.
+        GestionUsuarios usuarios = new GestionUsuarios();
+        Biblioteca biblio = new Biblioteca();
+        LibrosT libros = new LibrosT();
+        boolean funcionando = true;
+        meterDatosUsur(usuarios);
+        Usuario persona1 = usuarios.inicioSesion();
+        if (persona1.getTipo() == 'A') {
+            do {
+                System.out.println("1: Agregar libro nuevo");// comp
+                System.out.println("2: Eliminar libro");// comp
+                System.out.println("3: Actualizar libro");// comp
+                System.out.println("4: Buscar libro");// comp
+                System.out.println("5: Libros disponibles");// comp
                 System.out.println("6: Registrar Nuevo usuario");
                 System.out.println("7: Eliminar usuario");
                 System.out.println("8: Consultar información de usuario");
-                System.out.println("9: Realizar préstamos de libros");// ENRIQUE METE FUNCIÓN
-                System.out.println("10: Devolver libros prestados"); // ENRIQUE METE FUNCIÓN
-                System.out.println("11: Mostrar libros actualmente prestados"); // ENRIQUE METE FUNCIÓN
-                System.out.println("12: Mostrar número totales de libros prestados y activos");// ENRIQUE
-                                                                                               // METE
-                                                                                               // FUNCIÓN
-                System.out.println("13: Lista libros más prestados"); // ENRIQUE METE FUNCIÓN
+                System.out.println("9: Realizar préstamos de libros");// comp
+                System.out.println("10: Devolver libros prestados"); // comp
+                System.out.println("11: Mostrar libros actualmente prestados"); // comp
+                System.out.println("12: Mostrar número totales de libros prestados y activos");// comp
+                System.out.println("13: Lista libros más prestados"); // comp
                 System.out.println("14: Usuario con más préstamos activos"); // ENRIQUE METE FUNCIÓN
                 System.out.println("0: Salir");
                 int numero = Integer.parseInt(sc.nextLine());
                 switch (numero) {
-                        case 1:
-                                libro l = new libro();
-                                System.out.println("Introduce el título");
-                                String datos = sc.nextLine();
-                                l.setTitulo(datos);
-                                System.out.println("Introduce el ISBM");
-                                datos = sc.nextLine();
-                                l.setISBM(datos);
-                                System.out.println("Introduce la categoría");
-                                datos = sc.nextLine();
-                                l.setCategoria(datos);
-                                System.out.println("Introduce el Autor");
-                                datos = sc.nextLine();
-                                l.setAutor(datos);
-                                System.out.println("Introduce la Editorial");
-                                datos = sc.nextLine();
-                                l.setEditorial(datos);
-                                System.out.println("Introduce el número de páginas");
-                                int pag = Integer.parseInt(sc.nextLine());
-                                l.setNum_paginas(pag);
-                                l.setNum_prestaciones(0);
-                                libros.añadirLibro(l);
-                                System.out.println("Se ha añadido un libro nuevo");
-                                break;
-                        case 2:
-                                System.out.println("Introduce el título del libro a borrar");
-                                String lib = sc.nextLine();
-                                libros.eliminarLibro(lib);
-                                break;
-                        case 3:
-                                libro l1 = new libro();
-                                System.out.println("Introduce el título");
-                                String datos1 = sc.nextLine();
-                                l1.setTitulo(datos1);
-                                System.out.println("Introduce el ISBM");
-                                datos1 = sc.nextLine();
-                                l1.setISBM(datos1);
-                                System.out.println("Introduce la categoría");
-                                datos1 = sc.nextLine();
-                                l1.setCategoria(datos1);
-                                System.out.println("Introduce el Autor");
-                                datos1 = sc.nextLine();
-                                l1.setAutor(datos1);
-                                System.out.println("Introduce la Editorial");
-                                datos1 = sc.nextLine();
-                                l1.setEditorial(datos1);
-                                System.out.println("Introduce el número de páginas");
-                                int num1 = Integer.parseInt(sc.nextLine());
-                                l1.setNum_paginas(num1);
-                                System.out.println("Introduce el número de veces que se ha prestado");
-                                num1 = Integer.parseInt(sc.nextLine());
-                                l1.setNum_prestaciones(num1);
-                                libros.actualizarLibro(datos1, l1);
-                                break;
-                        case 4:
-                                boolean salir1 = true;
-                                do {
-                                        System.out.println("¿Qué desea buscar?");
-                                        System.out.println("1: Buscar por título");
-                                        System.out.println("2: Buscar por autor");
-                                        System.out.println("3: Buscar por categoría");
-                                        System.out.println("4: Buscar por editorial");
-                                        System.out.println("5: Salir");
-                                        int numero1 = Integer.parseInt(sc.nextLine());
-                                        switch (numero1) {
-                                                case 1:
-                                                        System.out.println("Introduce un título");
-                                                        String tit1 = sc.nextLine();
-                                                        System.out.println(libros.buscarlibro(tit1));
-                                                        break;
-                                                case 2:
-                                                        System.out.println("Introduce un autor");
-                                                        tit1 = sc.nextLine();
-                                                        System.out.println(libros.buscarPorAutor(tit1));
-                                                        break;
-                                                case 3:
-                                                        System.out.println("Introduce un título");
-                                                        tit1 = sc.nextLine();
-                                                        System.out.println(libros
-                                                                        .buscarPorCategoria(tit1));
-                                                        break;
-                                                case 4:
-                                                        System.out.println("Introduce una editorial");
-                                                        tit1 = sc.nextLine();
-                                                        System.out.println(libros
-                                                                        .buscarPorEditorial(tit1));
-                                                        break;
-                                                default:
-                                                        salir1 = false;
+                    case 1:
+                        libro l = new libro();
+                        System.out.println("Introduce el título");
+                        String datos = sc.nextLine();
+                        l.setTitulo(datos);
+                        System.out.println("Introduce el ISBM");
+                        datos = sc.nextLine();
+                        l.setISBM(datos);
+                        System.out.println("Introduce la categoría");
+                        datos = sc.nextLine();
+                        l.setCategoria(datos);
+                        System.out.println("Introduce el Autor");
+                        datos = sc.nextLine();
+                        l.setAutor(datos);
+                        System.out.println("Introduce la Editorial");
+                        datos = sc.nextLine();
+                        l.setEditorial(datos);
+                        System.out.println("Introduce el número de páginas");
+                        int pag = Integer.parseInt(sc.nextLine());
+                        l.setNum_paginas(pag);
+                        l.setNum_prestaciones(0);
+                        biblio.añadirLibroBiblioteca(l);
+                        System.out.println("Se ha añadido un libro nuevo");
+                        break;
+                    case 2:
+                        System.out.println("Introduce el título del libro a borrar");
+                        String lib = sc.nextLine();
+                        if (biblio.libros.eliminarLibro(lib)) {
+                            System.out.println("Libro eliminado");
+                        } else {
+                            System.out.println("Libro no encontrado");
+                        }
+                        break;
+                    case 3:
+                        libro l1 = new libro();
+                        System.out.println("Introduce el título del libro a modificar");
+                        String datos1 = sc.nextLine();
+                        l1.setTitulo(datos1);
+                        System.out.println("Introduce el ISBM");
+                        datos1 = sc.nextLine();
+                        l1.setISBM(datos1);
+                        System.out.println("Introduce la categoría");
+                        datos1 = sc.nextLine();
+                        l1.setCategoria(datos1);
+                        System.out.println("Introduce el Autor");
+                        datos1 = sc.nextLine();
+                        l1.setAutor(datos1);
+                        System.out.println("Introduce la Editorial");
+                        datos1 = sc.nextLine();
+                        l1.setEditorial(datos1);
+                        System.out.println("Introduce el número de páginas");
+                        int num1 = Integer.parseInt(sc.nextLine());
+                        l1.setNum_paginas(num1);
+                        System.out.println("Introduce el número de veces que se ha prestado");
+                        l1.setNum_prestaciones(Integer.parseInt(sc.nextLine()));
+
+                        if (biblio.libros.actualizarLibro(datos1, l1)) {
+                            System.out.println("Libro actualizado");
+                        } else {
+                            System.out.println("Libro no encontrado");
+                        }
+                        break;
+                    case 4:
+                        boolean salir1 = true;
+                        do {
+                            System.out.println("¿Qué desea buscar?");
+                            System.out.println("1: Buscar por título");
+                            System.out.println("2: Buscar por autor");
+                            System.out.println("3: Buscar por categoría");
+                            System.out.println("4: Buscar por editorial");
+                            System.out.println("5: Salir");
+                            int numero1 = Integer.parseInt(sc.nextLine());
+
+                            switch (numero1) {
+                                case 1:
+                                    System.out.println("Introduce un título");
+                                    String tit1 = sc.nextLine();
+                                    if (biblio.libros.buscarlibro(tit1) != null) {
+                                        System.out.println(biblio.libros.buscarlibro(tit1).toString());
+                                    } else {
+                                        System.out.println("Libro no encontrado o prestado");
+                                    }
+                                    break;
+                                case 2:
+                                    System.out.println("Introduce un autor");
+                                    tit1 = sc.nextLine();
+                                    libro[] resultado = biblio.libros.buscarPorAutor(tit1);
+                                    if (resultado != null) {
+                                        for (int i = 0; i < resultado.length; i++) {
+                                            System.out.println(resultado[i].toString());
+
                                         }
-                                } while (salir1);
-                                break;
-                        case 5:
-                                break;
-                        case 6:
-                                usuarios.registarUsuario();
-                                break;
-                        case 7:
-                                System.out.println("Introduce el usuario a borrar");
-                                String usur = sc.nextLine();
-                                usuarios.eliminarUsuario(usur);
-                                break;
-                        case 8:
-                                boolean salir = true;
-                                do {
-                                        System.out.println("¿Qué desea buscar?");
-                                        System.out.println("1: Lista de usuarios");
-                                        System.out.println(
-                                                        "2: Toda la información de todos los usuarios");
-                                        System.out.println("3: Información de un usuaio");
-                                        System.out.println("4: Salir");
-                                        int numero1 = Integer.parseInt(sc.nextLine());
-                                        switch (numero1) {
-                                                case 1:
-                                                        System.out.println(usuarios.listaUsuarios());
-                                                        break;
-                                                case 2:
-                                                        System.out.println(
-                                                                        usuarios.listaTodaInfoUsurs());
-                                                        break;
-                                                case 3:
-                                                        System.out.println("Introduce el usuario");
-                                                        String usur1 = sc.nextLine();
-                                                        System.out.println(usuarios.infoUsuario(usur1));
-                                                        break;
-                                                default:
-                                                        salir = false;
+                                    } else {
+                                        System.out.println("Libros no encontrados o prestados de ese autor");
+                                    }
+                                    break;
+                                case 3:
+                                    System.out.println("Introduce una categoría");
+                                    tit1 = sc.nextLine();
+                                    libro[] resultadoc = biblio.libros.buscarPorCategoria(tit1);
+                                    if (resultadoc != null) {
+                                        for (int i = 0; i < resultadoc.length; i++) {
+                                            System.out.println(resultadoc[i].toString());
+
                                         }
-                                } while (salir);
-                                break;
-                        case 9:
-                                break;
-                        case 10:
-                                break;
-                        case 11:
-                                break;
-                        case 12:
-                                break;
-                        case 13:
-                                break;
-                        case 14:
-                                break;
-                        default:
-                                funcionando = false;
+                                    } else {
+                                        System.out.println("Libros no encontrados o prestados de esa categoria");
+                                    }
+                                    break;
+                                case 4:
+                                    System.out.println("Introduce una editorial");
+                                    tit1 = sc.nextLine();
+                                    libro[] resultadoe = biblio.libros.buscarPorEditorial(tit1);
+                                    if (resultadoe != null) {
+                                        for (int i = 0; i < resultadoe.length; i++) {
+                                            System.out.println(resultadoe[i].toString());
+
+                                        }
+                                    } else {
+                                        System.out.println("Libros no encontrados o prestados de esa editorial");
+                                    }
+                                    break;
+                                default:
+                                    salir1 = false;
+                            }
+                        } while (salir1);
+                        break;
+                    case 5:
+                        System.out.println("Los libros actualmente disponibles son:");
+                        biblio.libros.mostrarLibros();
+                        break;
+                    case 6:
+                        usuarios.registarUsuario();
+                        break;
+                    case 7:
+                        System.out.println("Introduce el usuario a borrar");
+                        String usur = sc.nextLine();
+                        usuarios.eliminarUsuario(usur);
+                        break;
+                    case 8:
+                        boolean salir = true;
+                        do {
+                            System.out.println("¿Qué desea buscar?");
+                            System.out.println("1: Lista de usuarios");
+                            System.out.println("2: Toda la información de todos los usuarios");
+                            System.out.println("3: Información de un usuaio");
+                            System.out.println("4: Salir");
+                            int numero1 = Integer.parseInt(sc.nextLine());
+
+                            switch (numero1) {
+                                case 1:
+                                    System.out.println(usuarios.listaUsuarios());
+                                    break;
+                                case 2:
+                                    System.out.println(usuarios.listaTodaInfoUsurs());
+                                    break;
+                                case 3:
+                                    System.out.println("Introduce el usuario");
+                                    String usur1 = sc.nextLine();
+                                    System.out.println(usuarios.infoUsuario(usur1));
+                                    break;
+                                default:
+                                    salir = false;
+                            }
+                        } while (salir);
+
+                        break;
+                    case 9:
+                        System.out.println("Que usuario va a realizar el préstamo?");
+                        String nombre = sc.nextLine();
+                        if (usuarios.buscarUsuario(nombre) != null) {
+                            System.out.println("Que libro vas a prestar?");
+                            String titulo = sc.nextLine();
+                            if (biblio.libros.buscarlibro(titulo) != null) {
+                                biblio.realizar_Prestamo(titulo, usuarios.buscarUsuario(nombre));
+                            } else {
+                                System.out.println("Libro no encontrado");
+                            }
+                        } else {
+                            System.out.println("Usuario no encontrado");
+                        }
+                        break;
+
+                    case 10:
+                        System.out.println("Que libro es el que se va a devolver?");
+                        String titulo = sc.nextLine();
+                        if (biblio.terminar_Prestamo(titulo)) {
+                            System.out.println("Libro devuelto");
+                        }
+                        break;
+                    case 11:
+                        System.out.println("Los libros actualmente prestados son:");
+                        if (biblio.getPrestamos_Actuales() != null) {
+                            Prestamo[] prestamosa = biblio.getPrestamos_Actuales();
+                            for (int i = 0; i < prestamosa.length; i++) {
+                                prestamosa[i].getLibros().mostrarLibros();
+                            }
+                        } else {
+                            System.out.println("No hay préstamos actuales.");
+                        }
+                        break;
+                    case 12:
+                        System.out.println("El numero total de libros que se han prestado es de :");
+                        int contador = 0;
+                        Prestamo[] prestados = biblio.getPrestamos_Historicos();
+                        if (prestados != null) {
+                            for (int i = 0; i < prestados.length; i++) {
+                                contador += prestados[i].getLibros().getLibrost().length;
+                            }
+                        }
+                        System.out.println(contador);
+
+                        System.out.println("Y el numero total de libros que  estan prestados es de :");
+                        contador = 0;
+                        prestados = biblio.getPrestamos_Actuales();
+                        if (prestados != null) {
+                            for (int i = 0; i < prestados.length; i++) {
+                                contador += prestados[i].getLibros().getLibrost().length;
+                            }
+                        }
+                        System.out.println(contador);
+                        break;
+                    case 13:
+                        int tamaño = 0;
+                        tamaño += biblio.libros.getLibrost().length;
+                        Prestamo[] pre = biblio.getPrestamos_Actuales();
+                        libro[] li = new libro[100];
+                        int contl = 0;
+                        if (pre != null) {
+                            for (int i = 0; i < pre.length; i++) {
+                                tamaño += pre[i].getLibros().getLibrost().length;
+                                libro[] libaux = pre[i].getLibros().getLibrost();
+                                int posActual = 0;
+                                System.arraycopy(libaux, 0, li, posActual, libaux.length);
+                                posActual += libaux.length;
+                            }
+                        }
+                        for (int i = 0; i < li.length; i++) {
+                            if (li[i].getNum_prestaciones() >= contl) {
+                                contl = li[i].getNum_prestaciones();
+                            }
+                        }
+                        System.out.println("El libro o libros que mas se ha prestado con un numero de presataciones: "
+                                + contl + " y son :");
+                        for (int i = 0; i < li.length; i++) {
+                            if (li[i] != null && li[i].getNum_prestaciones() == contl) {
+                                System.out.println(li[i].toString());
+                            }
+                        }
+
+                        break;
+                    case 14:
+                        // usuario con mas prestamos activos
+                        Prestamo[] prea = biblio.getPrestamos_Actuales();
+                        if (prea != null) {
+                            boolean enc = false;
+                            int cuen = 0;
+                            String[] listusu = new String[100]; // Array de usuarios únicos
+
+                            for (int i = 0; i < listusu.length; i++) {
+                                listusu[i] = null;
+                            }
+
+                            // Obtener usuarios únicos
+                            for (int i = 0; i < prea.length; i++) {
+                                enc = false;
+                                String nombreUsuario = prea[i].getUsuario().getNombre();
+
+                                // Verificar si el usuario ya está en el array
+                                for (int j = 0; j < cuen; j++) {
+                                    if (nombreUsuario.equals(listusu[j])) {
+                                        enc = true;
+                                        break;
+                                    }
+                                }
+
+                                // Si no está en la lista, agregarlo
+                                if (!enc && cuen < listusu.length) {
+                                    listusu[cuen] = nombreUsuario;
+                                    cuen++;
+                                }
+                            }
+
+                            // Encontrar el número máximo de préstamos
+                            int maxPrestamos = 0;
+                            for (int i = 0; i < cuen; i++) {
+                                if (listusu[i] != null) {
+                                    int prestamosUsuario = biblio.buscarPrestamosActualesUsuario(listusu[i]).length;
+                                    if (prestamosUsuario > maxPrestamos) {
+                                        maxPrestamos = prestamosUsuario;
+                                    }
+                                }
+                            }
+
+                            // Imprimir usuarios con el máximo de préstamos
+                            System.out.println(
+                                    "Los usuarios con más libros prestados, con un total de " + maxPrestamos + " son:");
+                            for (int i = 0; i < cuen; i++) {
+                                if (listusu[i] != null
+                                        && biblio.buscarPrestamosActualesUsuario(listusu[i]).length == maxPrestamos) {
+                                    System.out.println(usuarios.buscarUsuario(listusu[i]));
+                                }
+                            }
+                        }
+
+                        break;
+
+                    default:
+                        funcionando = false;
                 }
         } while (funcionando);
 } else {
         do {
                 System.out.println("1: Cambiar Contraseña");
-                System.out.println("2: Actualizar datos");
-                System.out.println("3: Buscar libro");
-                System.out.println("4: Libros disponibles"); // ENRIQUE AÑADE FUNCIÓN
-                System.out.println("5: Realizar préstamos de libros");// ENRIQUE METE FUNCIÓN
-                System.out.println("6: Devolver libros prestados"); // ENRIQUE METE FUNCIÓN
-                System.out.println("7: Salir");
+                System.out.println("2: Buscar libro");// comp
+                System.out.println("3: Libros disponibles"); // comp
+                System.out.println("4: Realizar préstamos de libros");// comp
+                System.out.println("5: Devolver libros prestados"); // ENRIQUE METE FUNCIÓN
+                System.out.println("6: Salir");
+
                 int numero = Integer.parseInt(sc.nextLine());
                 switch (numero) {
                         case 1:
                         System.out.println(usuarios.cambiarContraseña(persona1.getNombre()));
                         break;
-                        case 2:
-                        System.out.println(usuarios.cambiarDatos(persona1.getNombre()));
-                        break;
-                        case 3:
-                                boolean salir2 = true;
-                                do {
-                                        System.out.println("¿Qué desea buscar?");
-                                        System.out.println("1: Buscar por título");
-                                        System.out.println("2: Buscar por autor");
-                                        System.out.println("3: Buscar por categoría");
-                                        System.out.println("4: Buscar por editorial");
-                                        System.out.println("5: Salir");
-                                        int numero1 = Integer.parseInt(sc.nextLine());
-                                        switch (numero1) {
-                                                case 1:
-                                                        System.out.println("Introduce un título");
-                                                        String tit1 = sc.nextLine();
-                                                        System.out.println(libros.buscarlibro(tit1));
-                                                        break;
-                                                case 2:
-                                                        System.out.println("Introduce un autor");
-                                                        tit1 = sc.nextLine();
-                                                        System.out.println(libros.buscarPorAutor(tit1));
-                                                        break;
-                                                case 3:
-                                                        System.out.println("Introduce un título");
-                                                        tit1 = sc.nextLine();
-                                                        System.out.println(libros
-                                                                        .buscarPorCategoria(tit1));
-                                                        break;
-                                                case 4:
-                                                        System.out.println("Introduce una editorial");
-                                                        tit1 = sc.nextLine();
-                                                        System.out.println(libros
-                                                                        .buscarPorEditorial(tit1));
-                                                        break;
-                                                default:
-                                                        salir2 = false;
+                    case 2:
+                        boolean salir1 = true;
+                        do {
+                            System.out.println("¿Qué desea buscar?");
+                            System.out.println("1: Buscar por título");
+                            System.out.println("2: Buscar por autor");
+                            System.out.println("3: Buscar por categoría");
+                            System.out.println("4: Buscar por editorial");
+                            System.out.println("5: Salir");
+                            int numero1 = Integer.parseInt(sc.nextLine());
+
+                            switch (numero1) {
+                                case 1:
+                                    System.out.println("Introduce un título");
+                                    String tit1 = sc.nextLine();
+                                    if (biblio.libros.buscarlibro(tit1) != null) {
+                                        System.out.println(biblio.libros.buscarlibro(tit1).toString());
+                                    } else {
+                                        System.out.println("Libro no encontrado o prestado");
+                                    }
+                                    break;
+                                case 2:
+                                    System.out.println("Introduce un autor");
+                                    tit1 = sc.nextLine();
+                                    libro[] resultado = biblio.libros.buscarPorAutor(tit1);
+                                    if (resultado != null) {
+                                        for (int i = 0; i < resultado.length; i++) {
+                                            System.out.println(resultado[i].toString());
+
                                         }
-                                } while (salir2);
-                                break;
-                        case 4:
-                                break;
-                        case 5:
-                                break;
-                        case 6:
-                                break;
-                        default:
-                                funcionando = false;
+                                    } else {
+                                        System.out.println("Libros no encontrados o prestados de ese autor");
+                                    }
+                                    break;
+                                case 3:
+                                    System.out.println("Introduce una categoría");
+                                    tit1 = sc.nextLine();
+                                    libro[] resultadoc = biblio.libros.buscarPorCategoria(tit1);
+                                    if (resultadoc != null) {
+                                        for (int i = 0; i < resultadoc.length; i++) {
+                                            System.out.println(resultadoc[i].toString());
+
+                                        }
+                                    } else {
+                                        System.out.println("Libros no encontrados o prestados de esa categoria");
+                                    }
+                                    break;
+                                case 4:
+                                    System.out.println("Introduce una editorial");
+                                    tit1 = sc.nextLine();
+                                    libro[] resultadoe = biblio.libros.buscarPorEditorial(tit1);
+                                    if (resultadoe != null) {
+                                        for (int i = 0; i < resultadoe.length; i++) {
+                                            System.out.println(resultadoe[i].toString());
+
+                                        }
+                                    } else {
+                                        System.out.println("Libros no encontrados o prestados de esa editorial");
+                                    }
+                                    break;
+                                default:
+                                    salir1 = false;
+                            }
+                        } while (salir1);
+                        break;
+                    case 3:
+                        System.out.println("Los libros disponibles en la biblioteca son: ");
+                        System.out.println(biblio.libros.toString());
+                        break;
+                    case 4:
+                        String nombre = persona1.getNombre();
+                        System.out.println("Que libro vas a prestar?");
+                        String titulo = sc.nextLine();
+                        if (biblio.libros.buscarlibro(titulo) != null) {
+                            biblio.realizar_Prestamo(titulo, usuarios.buscarUsuario(nombre));
+                        } else {
+                            System.out.println("Libro no encontrado");
+                        }
+
+                        break;
+                    case 5:
+                        System.out.println("Que libro es el que se va a devolver?");
+                        String titulo_devolver = sc.nextLine();
+                        if (biblio.terminar_Prestamo(titulo_devolver)) {
+                            System.out.println("Libro devuelto");
+                        }
+                        break;
+
+                    default:
+                        funcionando = false;
                 }
         } while (funcionando);
 }

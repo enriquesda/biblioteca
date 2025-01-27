@@ -354,11 +354,12 @@ public class Principal {
         } else {
             do {
                 System.out.println("1: Cambiar Contraseña");
-                System.out.println("2: Buscar libro");// comp
-                System.out.println("3: Libros disponibles"); // comp
-                System.out.println("4: Realizar préstamos de libros");// comp
-                System.out.println("5: Devolver libros prestados"); // ENRIQUE METE FUNCIÓN
-                System.out.println("6: Salir");
+                System.out.println("2: Cambiar Datos");
+                System.out.println("3: Buscar libro");// comp
+                System.out.println("4: Libros disponibles"); // comp
+                System.out.println("5: Realizar préstamos de libros");// comp
+                System.out.println("6: Devolver libros prestados"); // ENRIQUE METE FUNCIÓN
+                System.out.println("7: Salir");
 
                 int numero = Integer.parseInt(sc.nextLine());
                 switch (numero) {
@@ -366,6 +367,9 @@ public class Principal {
                         System.out.println(usuarios.cambiarContraseña(persona1.getNombre()));
                         break;
                     case 2:
+                    System.out.println(usuarios.cambiarDatos(persona1.getNombre()));
+                    break;
+                    case 3:
                         boolean salir1 = true;
                         do {
                             System.out.println("¿Qué desea buscar?");
@@ -430,11 +434,11 @@ public class Principal {
                             }
                         } while (salir1);
                         break;
-                    case 3:
+                    case 4:
                         System.out.println("Los libros disponibles en la biblioteca son: ");
                         System.out.println(biblio.libros.toString());
                         break;
-                    case 4:
+                    case 5:
                         String nombre = persona1.getNombre();
                         System.out.println("Que libro vas a prestar?");
                         String titulo = sc.nextLine();
@@ -445,7 +449,7 @@ public class Principal {
                         }
 
                         break;
-                    case 5:
+                    case 6:
                         System.out.println("Que libro es el que se va a devolver?");
                         String titulo_devolver = sc.nextLine();
                         if (biblio.terminar_Prestamo(titulo_devolver)) {

@@ -63,6 +63,28 @@ public class GestionUsuarios {
         return false;
     }
 
+    public boolean cambiarDatos(String usur){
+        int indice=buscarIndice(usur);
+        if(indice!=-1){
+            System.out.println("Introduce un nuevo correo");
+            String dato=sc.nextLine();
+            listaUsurs[indice].setCorreo(dato);
+            System.out.println("Introduce tu edad");
+            int edad=Integer.parseInt(sc.nextLine());
+            listaUsurs[indice].setEdad(edad);
+            System.out.println("Introduce tu sexo");
+            char sexo = sc.next().charAt(0);
+            listaUsurs[indice].setSexo(sexo);
+            System.out.println("Se han actualizado tus datos");
+            return true;
+        }
+        else{
+            System.out.println("Error.No se ha podido actualizar tus datos");
+            return false;
+        }
+
+    }
+
     // Método para eliminar Usuario
     public boolean eliminarUsuario(String usur) {
         int indice = buscarIndice(usur);

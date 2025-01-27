@@ -188,16 +188,17 @@ public class Biblioteca {
      * @param titulo
      * @return
      */
-    public boolean realizar_Prestamo(String titulo){
+    public void realizar_Prestamo(String titulo, Usuario u){
         Prestamo p = new Prestamo();
         if(libros.buscarIndiceLibro(titulo) != -1){
             p.AñadirLibroPrestamo(libros.buscarlibro(titulo));
+            p.setUsuario(u);
             añadirPrestamoActual(p);
             libros.eliminarLibro(titulo);
-            return true;
+  
         }else{
             System.out.println("El libro no se ha encontrado");
-            return false;
+     
         }
     }
 

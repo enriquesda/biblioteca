@@ -126,6 +126,13 @@ public class LibrosT {
         return stringlibro;
     }
 
+
+    public void incrementarPrestaciones(String titulo) {
+        int indice = buscarIndiceLibro(titulo);
+        if (indice != -1) {
+            librost[indice].setNum_prestaciones(librost[indice].getNum_prestaciones() + 1);
+        }
+    }
     // añadir prestar libro
 
 }

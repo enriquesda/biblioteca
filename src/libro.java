@@ -152,8 +152,6 @@ public class libro {
         return true;
     }
 
-    public void incrementarPrestaciones() {
-        this.Num_prestaciones++;
-    }
+    
 
 }

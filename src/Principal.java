@@ -1,9 +1,12 @@
 import java.util.Scanner;
 
+/*
+ * @author Enrique Ambrona y Alberto Vera
+ */
 public class Principal {
 
 public static Scanner sc = new Scanner(System.in);
-
+ 
 public static void main(String[] args) throws Exception { // CUANDO YA INICIAS SESIÓN Y TE METES EN CUALQUIER
                                                           // MENÚ,
                                                           // SI SALES TE SALES ENTERO DEL PROGRAMA. ME GUSTARÍA

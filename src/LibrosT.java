@@ -6,7 +6,7 @@ public class LibrosT {
     private static final int TAM = 100;
 
     public LibrosT() {
-        this.librost = new libro[60];
+        this.librost = new libro[120];
         this.lleno = 0;
     }
 
@@ -107,7 +107,7 @@ public class LibrosT {
         libro[] resultado = new libro[TAM];
         int autorLleno = 0;
         for (int i = 0; i < lleno; i++) {
-            if (librost[i].getAutor().equals(categoria)) {
+            if (librost[i].getCategoria().equals(categoria)) {
                 resultado[autorLleno] = librost[i];
                 autorLleno++;
             }
@@ -121,7 +121,7 @@ public class LibrosT {
         libro[] resultado = new libro[TAM];
         int autorLleno = 0;
         for (int i = 0; i < lleno; i++) {
-            if (librost[i].getAutor().equals(Editorial)) {
+            if (librost[i].getEditorial().equals(Editorial)) {
                 resultado[autorLleno] = librost[i];
                 autorLleno++;
             }

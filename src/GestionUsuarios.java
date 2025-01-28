@@ -221,7 +221,8 @@ public class GestionUsuarios {
         do {
             System.out.println("¿QUÉ QUIERES HACER?" + "\n");
             System.out.println("1: INICIAR SESIÓN");
-            System.out.println("2: REGISTRAR USUARIO" + "\n");
+            System.out.println("2: REGISTRAR USUARIO");
+            System.out.println("3: SALIR");
 
             int numero = Integer.parseInt(sc.nextLine());
             switch (numero) {

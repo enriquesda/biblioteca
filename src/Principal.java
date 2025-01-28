@@ -43,8 +43,8 @@ public class Principal {
                 System.out.println("10: Devolver libros prestados");
                 System.out.println("11: Mostrar libros actualmente prestados");
                 System.out.println("12: Mostrar número totales de libros prestados y activos");
-                System.out.println("13: Lista libros más prestados"); // comp
-                System.out.println("14: Usuario con más préstamos activos"); //comp
+                System.out.println("13: Lista libros más prestados");
+                System.out.println("14: Usuario con más préstamos activos"); 
                 System.out.println("0: Salir");
                 int numero = Integer.parseInt(sc.nextLine());
                 switch (numero) {
@@ -156,7 +156,7 @@ public class Principal {
                                     } else {
                                         System.out.println("Libros no encontrados o prestados de esa categoria");
                                     }
-                                        
+
                                     break;
                                 case 4:
                                     System.out.println("Introduce una editorial");
@@ -244,7 +244,7 @@ public class Principal {
                         if (biblio.getPrestamos_Actuales() != null) {
                             Prestamo[] prestamosa = biblio.getPrestamos_Actuales();
                             for (int i = 0; i < prestamosa.length; i++) {
-                                if(prestamosa[i] != null){
+                                if (prestamosa[i] != null) {
                                     prestamosa[i].getLibros().mostrarLibros();
                                 }
                             }
@@ -293,66 +293,92 @@ public class Principal {
                         break;
                     case 13:
                         int tamaño = 0;
-                        tamaño += biblio.libros.getLibrost().length;
+                        libro[] libau = biblio.libros.getLibrost();
+                        for (int i = 0; i < libau.length; i++) {
+                            if (libau[i] != null) {
+                                tamaño++;
+                            }
+                        }
+
                         Prestamo[] pre = biblio.getPrestamos_Actuales();
-                        libro[] li = new libro[100];
-                        int contl = 0;
                         if (pre != null) {
                             for (int i = 0; i < pre.length; i++) {
-                                tamaño += pre[i].getLibros().getLibrost().length;
-                                libro[] libaux = pre[i].getLibros().getLibrost();
-                                int posActual = 0;
-                                System.arraycopy(libaux, 0, li, posActual, libaux.length);
-                                posActual += libaux.length;
+                                if (pre[i] != null) { // Validar que pre[i] no sea null
+                                    libro[] libaux = pre[i].getLibros().getLibrost();
+                                    for (int j = 0; j < libaux.length; j++) {
+                                        if (libaux[j] != null) {
+                                            tamaño++;
+                                        }
+                                    }
+                                }
                             }
                         }
-                        for (int i = 0; i < li.length; i++) {
-                            if (li[i].getNum_prestaciones() >= contl) {
-                                contl = li[i].getNum_prestaciones();
+
+                        libro[] todosLosLibros = new libro[tamaño];
+                        int index = 0;
+
+                        for (int i = 0; i < libau.length; i++) {
+                            if (libau[i] != null) {
+                                todosLosLibros[index++] = libau[i];
                             }
                         }
-                        System.out.println("El libro o libros que mas se ha prestado con un numero de presataciones: "
-                                + contl + " y son :");
-                        for (int i = 0; i < li.length; i++) {
-                            if (li[i] != null && li[i].getNum_prestaciones() == contl) {
-                                System.out.println(li[i].toString());
+
+                        if (pre != null) {
+                            for (int i = 0; i < pre.length; i++) {
+                                if (pre[i] != null) {
+                                    libro[] libaux = pre[i].getLibros().getLibrost();
+                                    for (int j = 0; j < libaux.length; j++) {
+                                        if (libaux[j] != null) {
+                                            todosLosLibros[index++] = libaux[j];
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        int maxPrestaciones = 0;
+                        for (int i = 0; i < todosLosLibros.length; i++) {
+                            if (todosLosLibros[i].getNum_prestaciones() > maxPrestaciones) {
+                                maxPrestaciones = todosLosLibros[i].getNum_prestaciones();
+                            }
+                        }
+
+                        System.out.println("El libro o libros que más se han prestado con un número de prestaciones: "
+                                + maxPrestaciones + " y son:");
+                        for (int i = 0; i < todosLosLibros.length; i++) {
+                            if (todosLosLibros[i].getNum_prestaciones() == maxPrestaciones) {
+                                System.out.println(todosLosLibros[i].toString());
                             }
                         }
 
                         break;
                     case 14:
-                        // usuario con mas prestamos activos
                         Prestamo[] prea = biblio.getPrestamos_Actuales();
                         if (prea != null) {
                             boolean enc = false;
                             int cuen = 0;
-                            String[] listusu = new String[100]; // Array de usuarios únicos
-
+                            String[] listusu = new String[100]; 
                             for (int i = 0; i < listusu.length; i++) {
                                 listusu[i] = null;
                             }
-
-                            // Obtener usuarios únicos
                             for (int i = 0; i < prea.length; i++) {
-                                enc = false;
-                                String nombreUsuario = prea[i].getUsuario().getNombre();
-
-                                // Verificar si el usuario ya está en el array
-                                for (int j = 0; j < cuen; j++) {
-                                    if (nombreUsuario.equals(listusu[j])) {
-                                        enc = true;
-                                        break;
+                                if (prea[i] != null && prea[i].getUsuario() != null) {
+                                    enc = false;
+                                    String nombreUsuario = prea[i].getUsuario().getNombre();
+                                    for (int j = 0; j < cuen; j++) {
+                                        if (nombreUsuario.equals(listusu[j])) {
+                                            enc = true;
+                                            break;
+                                        }
                                     }
-                                }
 
-                                // Si no está en la lista, agregarlo
-                                if (!enc && cuen < listusu.length) {
-                                    listusu[cuen] = nombreUsuario;
-                                    cuen++;
+                                    if (!enc && cuen < listusu.length) {
+                                        listusu[cuen] = nombreUsuario;
+                                        cuen++;
+                                    }
                                 }
                             }
 
-                            // Encontrar el número máximo de préstamos
                             int maxPrestamos = 0;
                             for (int i = 0; i < cuen; i++) {
                                 if (listusu[i] != null) {
@@ -363,7 +389,6 @@ public class Principal {
                                 }
                             }
 
-                            // Imprimir usuarios con el máximo de préstamos
                             System.out.println(
                                     "Los usuarios con más libros prestados, con un total de " + maxPrestamos + " son:");
                             for (int i = 0; i < cuen; i++) {
@@ -386,7 +411,7 @@ public class Principal {
                 System.out.println("2: Cambiar Datos");
                 System.out.println("3: Buscar libro");
                 System.out.println("4: Libros disponibles");
-                System.out.println("5: Realizar préstamos de libros");// comp
+                System.out.println("5: Realizar préstamos de libros");
                 System.out.println("6: Devolver libros prestados"); // ENRIQUE METE FUNCIÓN
                 System.out.println("7: Salir");
 
@@ -396,8 +421,8 @@ public class Principal {
                         System.out.println(usuarios.cambiarContraseña(persona1.getNombre()));
                         break;
                     case 2:
-                    System.out.println(usuarios.cambiarDatos(persona1.getNombre()));
-                    break;
+                        System.out.println(usuarios.cambiarDatos(persona1.getNombre()));
+                        break;
                     case 3:
                         boolean salir1 = true;
                         do {
@@ -476,6 +501,7 @@ public class Principal {
                         } else {
                             System.out.println("Libro no encontrado");
                         }
+                        
 
                         break;
                     case 6:
@@ -497,7 +523,6 @@ public class Principal {
          * System.out.println(usuarios.listaTodaInfoUsurs());
          * System.out.println(g1.infoUsuario("pepe"));
          */
-
 
         sc.close();
     }

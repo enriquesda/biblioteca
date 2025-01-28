@@ -69,7 +69,7 @@ public class LibrosT {
     public boolean eliminarLibro(String titulo) {
         int indice = buscarIndiceLibro(titulo);
         if (indice != -1) {
-            for (int i = indice; i < lleno - 1; i++) {
+            for (int i = indice; i <=lleno - 1; i++) {
                 librost[i] = librost[i + 1];
                 librost[--lleno] = null;
             }

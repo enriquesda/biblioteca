@@ -81,9 +81,14 @@ public class Biblioteca {
     public int buscarIndicePrestamoAct(String titulo) {
         int buscar = -1;
         for (int i = 0; i < lleno_actuales && buscar == -1; i++) {
-            if (prestamos_Actuales[i].getLibros().buscarlibro(titulo).equals(titulo)) {
-                buscar = i;
+            if (prestamos_Actuales[i].getLibros().buscarlibro(titulo) == null) {
+          
+            }else{
+                if (prestamos_Actuales[i].getLibros().buscarlibro(titulo).getTitulo().equals(titulo)) {
+                    buscar = i;
+                }
             }
+           
         }
         return buscar;
     }
@@ -96,8 +101,12 @@ public class Biblioteca {
     public int buscarIndicePrestamoHist(String titulo) {
         int buscar = -1;
         for (int i = 0; i < lleno_historicos && buscar == -1; i++) {
-            if (prestamos_Historicos[i].getLibros().buscarlibro(titulo).equals(titulo)) {
-                buscar = i;
+            if (prestamos_Historicos[i].getLibros().buscarlibro(titulo) == null) {
+              
+            }else{
+                if (prestamos_Historicos[i].getLibros().buscarlibro(titulo).getTitulo().equals(titulo)) {
+                    buscar = i;
+                }
             }
         }
         return buscar;
@@ -124,7 +133,7 @@ public class Biblioteca {
     public boolean eliminarPrestamoAct(String titulo) {
         int indice = buscarIndicePrestamoAct(titulo);
         if (indice != -1) {
-            for (int i = indice; i < lleno_actuales - 1; i++) {
+            for (int i = indice; i <=lleno_actuales - 1; i++) {
                 prestamos_Actuales[i] = prestamos_Actuales[i + 1];
                 prestamos_Actuales[--lleno_actuales] = null;
             }
@@ -137,7 +146,7 @@ public class Biblioteca {
     public boolean eliminarPrestamoHist(String titulo) {
         int indice = buscarIndicePrestamoHist(titulo);
         if (indice != -1) {
-            for (int i = indice; i < lleno_historicos - 1; i++) {
+            for (int i = indice; i <=lleno_historicos - 1; i++) {
                 prestamos_Historicos[i] = prestamos_Historicos[i + 1];
                 prestamos_Historicos[--lleno_historicos] = null;
             }

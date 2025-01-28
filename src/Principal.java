@@ -19,23 +19,32 @@ public class Principal {
         meterDatosUsur(usuarios);
         biblio.setLibros(libros);
         Usuario persona1 = usuarios.inicioSesion();
-      
+        biblio.realizar_Prestamo("La Metamorfosis", usuarios.buscarUsuario("Alberto"));
+        biblio.realizar_Prestamo("Cien Años de Soledad", usuarios.buscarUsuario("Enrique"));
+        if (biblio.terminar_Prestamo("Cien Años de Soledad")) {
+            System.out.println("Libro devuelto");
+        }
+        biblio.realizar_Prestamo("Cien Años de Soledad", usuarios.buscarUsuario("Enrique"));
+        if (biblio.terminar_Prestamo("Cien Años de Soledad")) {
+            System.out.println("Libro devuelto");
+        }
+        biblio.realizar_Prestamo("Cien Años de Soledad", usuarios.buscarUsuario("Enrique"));
         if (persona1.getTipo() == 'A') {
             do {
                 System.out.println("1: Agregar libro nuevo");
                 System.out.println("2: Eliminar libro");
-                System.out.println("3: Actualizar libro");// comp
+                System.out.println("3: Actualizar libro");
                 System.out.println("4: Buscar libro");
-                System.out.println("5: Libros disponibles");// comp
+                System.out.println("5: Libros disponibles");
                 System.out.println("6: Registrar Nuevo usuario");
                 System.out.println("7: Eliminar usuario");
                 System.out.println("8: Consultar información de usuario");
-                System.out.println("9: Realizar préstamos de libros");// comp
-                System.out.println("10: Devolver libros prestados"); // comp
-                System.out.println("11: Mostrar libros actualmente prestados"); // comp
-                System.out.println("12: Mostrar número totales de libros prestados y activos");// comp
+                System.out.println("9: Realizar préstamos de libros");
+                System.out.println("10: Devolver libros prestados");
+                System.out.println("11: Mostrar libros actualmente prestados");
+                System.out.println("12: Mostrar número totales de libros prestados y activos");
                 System.out.println("13: Lista libros más prestados"); // comp
-                System.out.println("14: Usuario con más préstamos activos"); // ENRIQUE METE FUNCIÓN
+                System.out.println("14: Usuario con más préstamos activos"); //comp
                 System.out.println("0: Salir");
                 int numero = Integer.parseInt(sc.nextLine());
                 switch (numero) {
@@ -75,10 +84,10 @@ public class Principal {
                     case 3:
                         libro l1 = new libro();
                         System.out.println("Introduce el título del libro a modificar");
-                        String datos1 = sc.nextLine();
-                        l1.setTitulo(datos1);
+                        String dat = sc.nextLine();
+                        l1.setTitulo(dat);
                         System.out.println("Introduce el ISBM");
-                        datos1 = sc.nextLine();
+                        String datos1 = sc.nextLine();
                         l1.setISBM(datos1);
                         System.out.println("Introduce la categoría");
                         datos1 = sc.nextLine();
@@ -95,7 +104,7 @@ public class Principal {
                         System.out.println("Introduce el número de veces que se ha prestado");
                         l1.setNum_prestaciones(Integer.parseInt(sc.nextLine()));
 
-                        if (biblio.libros.actualizarLibro(datos1, l1)) {
+                        if (biblio.libros.actualizarLibro(dat, l1)) {
                             System.out.println("Libro actualizado");
                         } else {
                             System.out.println("Libro no encontrado");
@@ -235,7 +244,9 @@ public class Principal {
                         if (biblio.getPrestamos_Actuales() != null) {
                             Prestamo[] prestamosa = biblio.getPrestamos_Actuales();
                             for (int i = 0; i < prestamosa.length; i++) {
-                                prestamosa[i].getLibros().mostrarLibros();
+                                if(prestamosa[i] != null){
+                                    prestamosa[i].getLibros().mostrarLibros();
+                                }
                             }
                         } else {
                             System.out.println("No hay préstamos actuales.");
@@ -247,7 +258,16 @@ public class Principal {
                         Prestamo[] prestados = biblio.getPrestamos_Historicos();
                         if (prestados != null) {
                             for (int i = 0; i < prestados.length; i++) {
-                                contador += prestados[i].getLibros().getLibrost().length;
+                                if (prestados[i] != null) {
+                                    libro[] auxlib = prestados[i].getLibros().getLibrost();
+                                    if (auxlib != null) { // Asegúrate de que 'auxlib' no sea nulo
+                                        for (int j = 0; j < auxlib.length; j++) {
+                                            if (auxlib[j] != null) {
+                                                contador++;
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                         System.out.println(contador);
@@ -257,7 +277,16 @@ public class Principal {
                         prestados = biblio.getPrestamos_Actuales();
                         if (prestados != null) {
                             for (int i = 0; i < prestados.length; i++) {
-                                contador += prestados[i].getLibros().getLibrost().length;
+                                if (prestados[i] != null) {
+                                    libro[] auxlib = prestados[i].getLibros().getLibrost();
+                                    if (auxlib != null) { // Asegúrate de que 'auxlib' no sea nulo
+                                        for (int j = 0; j < auxlib.length; j++) {
+                                            if (auxlib[j] != null) {
+                                                contador++;
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                         System.out.println(contador);
@@ -355,8 +384,8 @@ public class Principal {
             do {
                 System.out.println("1: Cambiar Contraseña");
                 System.out.println("2: Cambiar Datos");
-                System.out.println("3: Buscar libro");// comp
-                System.out.println("4: Libros disponibles"); // comp
+                System.out.println("3: Buscar libro");
+                System.out.println("4: Libros disponibles");
                 System.out.println("5: Realizar préstamos de libros");// comp
                 System.out.println("6: Devolver libros prestados"); // ENRIQUE METE FUNCIÓN
                 System.out.println("7: Salir");

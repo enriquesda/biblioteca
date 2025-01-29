@@ -8,10 +8,6 @@ public class Principal {
     public static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) throws Exception { 
-        // CUANDO YA INICIAS SESIÓN Y TE METES EN CUALQUIER MENÚ,
-        // SI SALES TE SALES ENTERO DEL PROGRAMA. ME GUSTARÍA QUE
-        // VOLVIERA AL PRINCIPIO DEL TODO POR SI QUIERES INICIAR
-        // SESIÓN CON OTRO USUARIO O SALIRTE.
         GestionUsuarios usuarios = new GestionUsuarios();
         Biblioteca biblio = new Biblioteca();
         LibrosT libros = new LibrosT();
@@ -529,12 +525,7 @@ public class Principal {
             }else{
                 funcionando = false;
             }
-            // PARA PRUEBA
-            /*
-             * System.out.println(usuarios.listaUsuarios());
-             * System.out.println(usuarios.listaTodaInfoUsurs());
-             * System.out.println(g1.infoUsuario("pepe"));
-             */
+         
         } while (funcionando);
         sc.close();
     }
@@ -543,6 +534,7 @@ public class Principal {
 
     }
 
+    //Llenar array de usuarios
     public static void meterDatosUsur(GestionUsuarios usuario) {
         usuario.añadirUsuario(new Usuario("Alberto", "1a2345", 36, 'H', "alberto1@gmail.com", 'A'));
         usuario.añadirUsuario(new Usuario("Beatriz", "2b3456", 28, 'M', "beatriz2@gmail.com", 'U'));
@@ -602,6 +594,7 @@ public class Principal {
         usuario.añadirUsuario(new Usuario("Diego", "6d7890", 41, 'H', "diego6@gmail.com", 'U'));
     }
 
+    //Llenar array de libros
     public static void meterDatosLib(LibrosT lib) {
         lib.añadirLibro(new libro("La Metamorfosis", "7584999347524", "Novela", "Kafka", "Alianza", 90, 0));
         lib.añadirLibro(new libro("Cien Años de Soledad", "9788497592208", "Novela", "Gabriel García Márquez",

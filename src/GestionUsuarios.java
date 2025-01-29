@@ -73,7 +73,7 @@ public class GestionUsuarios {
             int edad=Integer.parseInt(sc.nextLine());
             listaUsurs[indice].setEdad(edad);
             System.out.println("Introduce tu sexo");
-            char sexo = sc.next().charAt(0);
+            char sexo = sc.nextLine().charAt(0);
             listaUsurs[indice].setSexo(sexo);
             System.out.println("Se han actualizado tus datos");
             return true;

@@ -29,8 +29,10 @@ public class Principal {
             System.out.println("Libro devuelto");
         }
         biblio.realizar_Prestamo("Cien Años de Soledad", usuarios.buscarUsuario("Enrique"));
-        if (persona1.getTipo() == 'A') {
-            do {
+
+        do {
+            if (persona1.getTipo() == 'A') {
+
                 System.out.println("1: Agregar libro nuevo");
                 System.out.println("2: Eliminar libro");
                 System.out.println("3: Actualizar libro");
@@ -44,7 +46,8 @@ public class Principal {
                 System.out.println("11: Mostrar libros actualmente prestados");
                 System.out.println("12: Mostrar número totales de libros prestados y activos");
                 System.out.println("13: Lista libros más prestados");
-                System.out.println("14: Usuario con más préstamos activos"); 
+                System.out.println("14: Usuario con más préstamos activos");
+                System.out.println("15:Cambiar de usuario");
                 System.out.println("0: Salir");
                 int numero = Integer.parseInt(sc.nextLine());
                 switch (numero) {
@@ -357,7 +360,7 @@ public class Principal {
                         if (prea != null) {
                             boolean enc = false;
                             int cuen = 0;
-                            String[] listusu = new String[100]; 
+                            String[] listusu = new String[100];
                             for (int i = 0; i < listusu.length; i++) {
                                 listusu[i] = null;
                             }
@@ -401,19 +404,23 @@ public class Principal {
 
                         break;
 
+                    case 15:
+                        persona1 = usuarios.inicioSesion();
+                        break;
                     default:
                         funcionando = false;
                 }
-            } while (funcionando);
-        } else {
-            do {
+
+            } else if (persona1.getTipo() == 'U') {
+
                 System.out.println("1: Cambiar Contraseña");
                 System.out.println("2: Cambiar Datos");
                 System.out.println("3: Buscar libro");
                 System.out.println("4: Libros disponibles");
                 System.out.println("5: Realizar préstamos de libros");
-                System.out.println("6: Devolver libros prestados"); // ENRIQUE METE FUNCIÓN
-                System.out.println("7: Salir");
+                System.out.println("6: Devolver libros prestados");
+                System.out.println("7: Cambiar usuario");
+                System.out.println("8: Salir");
 
                 int numero = Integer.parseInt(sc.nextLine());
                 switch (numero) {
@@ -501,7 +508,6 @@ public class Principal {
                         } else {
                             System.out.println("Libro no encontrado");
                         }
-                        
 
                         break;
                     case 6:
@@ -512,18 +518,23 @@ public class Principal {
                         }
                         break;
 
+                    case 7:
+                        persona1 = usuarios.inicioSesion();
+                        break;
                     default:
                         funcionando = false;
                 }
-            } while (funcionando);
-        }
-        // PARA PRUEBA
-        /*
-         * System.out.println(usuarios.listaUsuarios());
-         * System.out.println(usuarios.listaTodaInfoUsurs());
-         * System.out.println(g1.infoUsuario("pepe"));
-         */
 
+            }else{
+                funcionando = false;
+            }
+            // PARA PRUEBA
+            /*
+             * System.out.println(usuarios.listaUsuarios());
+             * System.out.println(usuarios.listaTodaInfoUsurs());
+             * System.out.println(g1.infoUsuario("pepe"));
+             */
+        } while (funcionando);
         sc.close();
     }
 

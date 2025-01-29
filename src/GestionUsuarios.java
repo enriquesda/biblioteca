@@ -236,7 +236,7 @@ public class GestionUsuarios {
                     break;
 
                 default:
-                    pers1= new Usuario("PERRRRRO", "1a2345", 36, 'H', "alberto1@gmail.com", 'O');
+                    pers1= new Usuario("PERRRRRO", "1a2345", 36, 'H', "alberto1@gmail.com", 'S');
                     funcionando = false;
             }
 

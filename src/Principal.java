@@ -7,7 +7,8 @@ public class Principal {
 
     public static Scanner sc = new Scanner(System.in);
 
-    public static void main(String[] args) throws Exception { // CUANDO YA INICIAS SESIÓN Y TE METES EN CUALQUIER MENÚ,
+    public static void main(String[] args) throws Exception { 
+        // CUANDO YA INICIAS SESIÓN Y TE METES EN CUALQUIER MENÚ,
         // SI SALES TE SALES ENTERO DEL PROGRAMA. ME GUSTARÍA QUE
         // VOLVIERA AL PRINCIPIO DEL TODO POR SI QUIERES INICIAR
         // SESIÓN CON OTRO USUARIO O SALIRTE.

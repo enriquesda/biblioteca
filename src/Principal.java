@@ -426,10 +426,10 @@ public class Principal {
                 int numero = Integer.parseInt(sc.nextLine());
                 switch (numero) {
                     case 1:
-                        System.out.println(usuarios.cambiarContraseña(persona1.getNombre()));
+                        usuarios.cambiarContraseña(persona1.getNombre());
                         break;
                     case 2:
-                        System.out.println(usuarios.cambiarDatos(persona1.getNombre()));
+                        usuarios.cambiarDatos(persona1.getNombre());
                         break;
                     case 3:
                         boolean salir1 = true;
